@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Остановки</title>
+    </head>
+    <body>
+        {% load dict_tags %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Street</th>
+                <th>District</th>
+            </tr>
+            {% for stationData in displayPage %}
+            <tr>
+            {% for key, value in stationData.items %}
+            <td>{{ value }}</td>
+            {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        {% if displayPage.has_previous %}
+        <a style="text-decoration:none" href="?page={{ displayPage.previous_page_number }}"> <span>&#8592;</span> </a>
+        <a style="text-decoration:none" href="?page=1"> <span>&#171;</span> </a>
+        {% endif %}
+        {{ current_page_number }}
+        {% if displayPage.has_next %}
+        <a style="text-decoration:none" href="?page={{ last_page_number }}"> <span>&#187;</span> </a>
+        <a style="text-decoration:none" href="?page={{ displayPage.next_page_number }}"> <span>&#8594;</span> </a>
+        {% endif %}
+    </body>
+</html>
